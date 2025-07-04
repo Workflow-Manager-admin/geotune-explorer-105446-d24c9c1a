@@ -1,104 +1,592 @@
-/* CSS Variables for Theme Management */
+/* --- THEME COLORS --- */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #1DB954;
+  --secondary: #191414;
+  --accent: #F5C518;
+  --bg: #fff;
+  --bg2: #f7f7fa;
+  --text: #191414;
+  --text2: #333;
+  --sidebar-width: 72px;
+  --sidebar-bg: #191414;
+  --sidebar-text: #fff;
+  --sidebar-accent: #1DB954;
+  --topbar-bg: #fff;
+  --filter-drawer-bg: #fffbe9;
+  --avatar-size: 32px;
+  --card-radius: 18px;
+  --transition-fast: 0.16s cubic-bezier(0.4,0.2,0.2,1);
 }
 
 [data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+  --bg: #191414;
+  --bg2: #222;
+  --text: #fff;
+  --text2: #FFF59D;
+  --sidebar-bg: #222;
+  --topbar-bg: #191414;
+  --filter-drawer-bg: #23231c;
 }
 
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+.MuseMap-Root {
+  display: flex;
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: var(--bg);
+  color: var(--text);
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.MuseMap-Sidebar {
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  padding: 14px 0;
+  gap: 28px;
+  z-index: 2;
+  box-shadow: 2px 0 10px 0 #0001;
 }
-
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.MuseMap-Sidebar-Logo {
+  margin-bottom: 12px;
 }
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+.MuseMap-Sidebar-Logo img {
+  width: 46px;
+  height: 46px;
+}
+.MuseMap-Sidebar-Nav {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 16px;
+}
+.MuseMap-NavLink,
+.MuseMap-NavBtn {
+  background: none;
+  color: var(--sidebar-text);
+  font-size: 18px;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  text-decoration: none;
+  text-align: left;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: color var(--transition-fast);
+  border-radius: 8px;
+  padding: 8px 0;
+  outline: none;
+}
+.MuseMap-NavLink.active,
+.MuseMap-NavBtn:focus,
+.MuseMap-NavLink:focus,
+.MuseMap-NavBtn:hover,
+.MuseMap-NavLink:hover {
+  color: var(--accent);
+}
+.MuseMap-Sidebar-Footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.MuseMap-Sidebar-ThemeToggle {
+  background: var(--secondary);
+  border: none;
+  border-radius: 50%;
+  color: var(--accent);
+  font-size: 19px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 4px #0001;
+}
+.MuseMap-Avatar,
+.MuseMap-AvatarBtn .MuseMap-Avatar {
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+.MuseMap-LoginBtn,
+.MuseMap-ProfileBtn {
+  background: var(--primary);
+  color: var(--sidebar-bg);
+  border: none;
+  border-radius: 12px;
+  padding: 7px 22px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 4px;
+  transition: background var(--transition-fast);
+}
+.MuseMap-LoginBtn:hover {
+  background: var(--accent);
+}
+.MuseMap-ProfileBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+/* Main Layout */
+.MuseMap-Main {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--bg2);
+}
+.MuseMap-Topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 36px;
+  background: var(--topbar-bg);
+  min-height: 64px;
+  height: 64px;
+  font-weight: bold;
+  box-shadow: 0 2px 12px #0002;
+  z-index: 10;
+}
+.MuseMap-Topbar-Title {
+  font-size: 1.50rem;
+  color: var(--primary);
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+}
+.MuseMap-Topbar-Nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.MuseMap-Guest {
+  color: var(--text2);
+  font-size: 1rem;
+}
+.MuseMap-AvatarBtn {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  color: var(--primary);
+  font-size: 1.07rem;
+  padding: 0;
+  font-weight: normal;
+  cursor: pointer;
+  gap: 7px;
+}
+.MuseMap-Topbar-ThemeToggle {
+  background: var(--sidebar-bg);
+  color: var(--accent);
+  border: none;
+  font-size: 18px;
+  padding: 8px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+/* Content Row */
+.MuseMap-ContentRow {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  min-height: 0;
+}
+.MuseMap-WorldMapSec {
+  width: 48%;
+  padding: 26px 22px 10px 22px;
+  min-width: 320px;
+}
+.MuseMap-PlaylistSec {
+  width: 52%;
+  min-width: 320px;
+  padding: 26px 36px 10px 12px;
+  display: flex;
+  flex-direction: column;
+}
+.MuseMap-WorldMap {
+  border-radius: var(--card-radius);
+  background: var(--bg);
+  box-shadow: 0 4px 32px #0001;
+  padding: 19px 24px 18px 24px;
+  min-height: 340px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+}
+.WorldMapSVG {
+  border-radius: 11px;
+  background: #f0f4f8;
+  box-shadow: 0 2px 8px #0001;
+  margin-bottom: 8px;
+}
+.MuseMap-WorldMap h3 {
+  margin-bottom: 7px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem;
+}
+.MuseMap-WorldMap-Desc {
+  color: var(--text2);
+  margin: 10px 0 4px 0;
+  font-size: .98rem;
+}
+.MuseMap-TopTracks {
+  list-style: none;
+  margin: 9px 0 0 0;
+  padding: 0 7px;
+  font-size: 1rem;
+  color: var(--primary);
+}
+.MuseMap-TopTracks li {
+  margin-top: 3px;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+/* Playlist Section */
+.MuseMap-PlaylistBox {
+  border-radius: var(--card-radius);
+  background: var(--bg);
+  min-height: 340px;
+  padding: 21px 26px 14px 26px;
+  box-shadow: 0 4px 32px #0001;
+  display: flex;
+  flex-direction: column;
+}
+.MuseMap-Section-Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 14px;
+  gap: 10px;
+}
+.MuseMap-FiltersBtn {
+  background: var(--primary);
+  color: var(--bg);
+  border: none;
+  border-radius: 9px;
+  padding: 6px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.15s;
+}
+.MuseMap-FiltersBtn:hover {
+  background: var(--accent);
+}
+.MuseMap-PlaylistList,
+.MuseMap-Recommendations ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 5px 0;
+}
+.MuseMap-PlaylistItem, .MuseMap-Recommendations li {
+  margin-bottom: 8px;
+  font-size: 1rem;
+  background: var(--bg2);
+  border-radius: 6px;
+  padding: 6px 14px;
+  box-shadow: 0 1px 5px #0000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.MuseMap-SongTitle {
+  font-weight: 500;
+  color: var(--text);
+}
+.MuseMap-Artist {
+  color: var(--text2);
+  font-size: .9em;
+}
+.MuseMap-Badge {
+  margin-left: 0.5em;
+  background: var(--accent);
+  color: var(--sidebar-bg);
+  border-radius: 15px;
+  padding: 2px 11px;
+  font-size: .86em;
+}
+.MuseMap-Loader {
+  font-size: 1.1rem;
+  color: var(--primary);
+  padding: 32px 0;
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.MuseMap-Recommendations h3 {
+  margin-top: 12px;
+  color: var(--primary);
+}
+
+/* --- Filter Drawer --- */
+.MuseMap-FiltersDrawer {
+  position: fixed;
+  top: 0;
+  right: -375px;
+  width: 330px;
+  max-width: 84vw;
+  height: 100vh;
+  background: var(--filter-drawer-bg);
+  box-shadow: -3px 0 40px #0002;
+  z-index: 1200;
+  transition: right var(--transition-fast);
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.MuseMap-FiltersDrawer.open {
+  right: 0;
+  transition: right var(--transition-fast);
+}
+.MuseMap-FiltersForm {
+  padding: 28px 28px 18px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.MuseMap-FiltersForm h2 {
+  text-align: left;
+  margin-bottom: 7px;
+}
+.MuseMap-FiltersForm label {
+  font-weight: 500;
+  color: var(--text);
+  display: block;
+  margin-bottom: 7px;
+  text-align: left;
+}
+.MuseMap-FiltersForm select, .MuseMap-FiltersForm input {
+  margin-top: 6px;
+  width: 100%;
+  padding: 7px 9px;
+  border-radius: 7px;
+  border: 1px solid #dedede;
+  background: #fafaf8;
+  font-size: 1.02em;
+  outline: none;
+}
+.MuseMap-Filters-Actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.MuseMap-Filters-Cancel, .MuseMap-Filters-Apply {
+  padding: 7px 16px;
+  font-size: 1em;
+  border-radius: 9px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+.MuseMap-Filters-Cancel {
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+.MuseMap-Filters-Apply {
+  background: var(--primary);
+  color: #fff;
+}
+.MuseMap-Filters-Backdrop {
+  position: fixed;
+  z-index: 1199;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #2224;
+  cursor: pointer;
+}
+
+/* --- Auth/Profile Modal + Drawer --- */
+/* Overlay */
+.MuseMap-Backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #191414aa;
+  z-index: 7000;
+}
+
+/* Auth Modal */
+.MuseMap-AuthModal-Wrapper {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.MuseMap-AuthModal {
+  background: var(--bg2);
+  border-radius: 16px;
+  box-shadow: 0 7px 50px 2px #0007;
+  padding: 44px 44px 28px 44px;
+  max-width: 340px;
+  width: 90vw;
+  position: relative;
+  z-index: 9999;
+}
+.MuseMap-Modal-Close {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 2rem;
+  position: absolute;
+  right: 16px;
+  top: 18px;
+  cursor: pointer;
+  z-index: 99;
+}
+.MuseMap-AuthForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+.MuseMap-AuthForm input {
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid #dedede;
+  margin-top: 5px;
+  font-size: 1em;
+  outline: none;
+}
+.MuseMap-AuthSubmit {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-size: 1.01em;
+  font-weight: bold;
+  padding: 8px 0;
+  margin-top: 4px;
+  cursor: pointer;
+}
+.MuseMap-Auth-Link {
+  margin-top: 11px;
+  color: var(--text2);
+  font-size: .99em;
+}
+.MuseMap-Auth-Link button {
+  background: none;
+  color: var(--primary);
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+.MuseMap-Error {
+  color: #d21;
+  font-size: .98em;
+  margin: 4px 0;
+}
+
+/* Profile Drawer */
+.MuseMap-ProfileDrawer {
+  position: fixed;
+  top: 0; right: -340px;
+  width: 312px;
+  max-width: 90vw;
+  height: 100vh;
+  background: var(--bg);
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+  box-shadow: -6px 0 32px #0002;
+  transition: right var(--transition-fast);
+  z-index: 1050;
+  padding: 0;
+}
+.MuseMap-ProfileDrawer.open {
+  right: 0;
+  transition: right var(--transition-fast);
+}
+.MuseMap-ProfileContent {
+  padding: 34px 38px 22px 28px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  gap: 15px;
+}
+.MuseMap-Profile-Header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+.MuseMap-Avatar-Large {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: #eee;
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 45px;
+  object-fit: cover;
+}
+.MuseMap-Profile-Body {
+  margin-bottom: 24px;
+}
+.MuseMap-Profile-Desc {
+  margin-top: 8px;
+  color: var(--text2);
+  font-size: 1.01em;
+}
+.MuseMap-Profile-Username {
+  font-size: 1em;
+  color: var(--text2);
+}
+.MuseMap-Profile-Actions {
+  text-align: center;
+  margin-top: 26px;
+}
+.MuseMap-Profile-Logout {
+  background: var(--secondary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size:1.07em;
+  padding:10px 26px;
+  cursor: pointer;
+  font-weight: bold;
+  border: 2px solid var(--primary);
+  transition: background .18s;
+}
+.MuseMap-Profile-Logout:hover {
+  background: var(--primary);
+}
+
+/* Responsive Styles */
+@media (max-width: 950px) {
+  .MuseMap-WorldMapSec, .MuseMap-PlaylistSec { padding: 16px 7px 8px 7px; }
+  .MuseMap-Main { font-size: .93em }
+}
+@media (max-width: 767px) {
+  .MuseMap-Root { flex-direction: column; }
+  .MuseMap-Sidebar {
+    flex-direction: row;
+    width: 100vw;
+    height: 64px;
+    position: sticky;
+    bottom: 0;
+    top: unset;
+    z-index: 11;
+    box-shadow: 0 -1px 10px 0 #0002;
+    padding: 0 0;
+    border-radius: 0;
+    gap: 15px;
+    background: var(--sidebar-bg);
   }
-  to {
-    transform: rotate(360deg);
+  .MuseMap-Sidebar-Nav { flex-direction: row; gap: 11px; margin-top: 3px; }
+  .MuseMap-Sidebar-Footer { flex-direction: row; margin-top: 0; gap: 10px; }
+  .MuseMap-Main { padding-bottom: 72px; }
+  .MuseMap-ContentRow { flex-direction: column; }
+  .MuseMap-WorldMapSec, .MuseMap-PlaylistSec { width: 100%; min-width: 0; }
+  .MuseMap-PlaylistSec, .MuseMap-WorldMapSec {
+    padding: 6px 2vw 3px 2vw;
   }
+  .MuseMap-WorldMap, .MuseMap-PlaylistBox { min-height: 220px; }
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+@media (max-width:500px) {
+  .MuseMap-Topbar { padding: 0 8px;}
+  .MuseMap-AuthModal { padding: 32px 8px 14px 8px;}
 }
